@@ -5,6 +5,7 @@ public class CompassArrow : MonoBehaviour
     public Transform enemy;
     public Camera cam;
 
+
     public float edgeOffset = 100f;
 
     void Update()

@@ -1,14 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static System.Math;
 
 public class Enemy : MonoBehaviour
 {
     NavMeshAgent agent;
     public Transform player;
 
+    //[Header("Footsteps")]
+    //public AudioSource walkSounds;
+    //public List<AudioClip> footsteps;
+
+    [Header("Spawn point")]
     [SerializeField] GameObject spawnPoints;
-    [SerializeField] Vector3 defaultPosition;
- 
+
     void Start()
     {
         setRandomSpawnPosition();
@@ -22,8 +28,20 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(player.position);
 
+
         }
+
+        //if (Abs(transform.position.x) - Abs(player.position.x) < 10 || Abs(transform.position.z) - Abs(player.position.z) < 10)
+        //{
+        //    walkSounds.Play();
+        //    Debug.Log("SOUNDD");
+        //}
+
+
+
     }
+
+
 
     void ResetHandler()
     {
@@ -32,11 +50,7 @@ public class Enemy : MonoBehaviour
 
     void setRandomSpawnPosition()
     {
-        if (spawnPoints == null)
-        {
-            transform.position = defaultPosition;
-        }
-
+        if (spawnPoints == null) return;
 
         Debug.Log(spawnPoints.transform.childCount);
 

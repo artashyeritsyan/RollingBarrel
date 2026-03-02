@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float moveSpeed = 100;
     [SerializeField] float dashForce = 100;
     [SerializeField] float dashCost = 10;
+    [SerializeField] int dashMaxCount = 2;
+    private int dashesLeft;
 
     [SerializeField] MenuController menuController;
 
@@ -24,12 +26,16 @@ public class PlayerController : MonoBehaviour
 
     bool gamePaused;
     bool isOverdrunked;
+    bool isOnGround;
+    bool isHaveSecondJump;
 
     Transform child;
 
     [SerializeField] Transform cameraTransform;
 
     private int alcoholLevel = 0;
+
+    public GameObject beerCollectionEffect;
 
 
     void Start()
@@ -129,10 +135,14 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Dash");
 
-        if (menuController.GetBeerFilledValue() >= dashCost)
+        if (menuController.GetBeerFilledValue() >= dashCost && dashesLeft > 0)
         {
             rb.AddForce((moveDirection + new Vector3(0, 0.5f, 0)) * dashForce);
             menuController.reduceBeerFilledValue(dashCost);
+            Instantiate(beerCollectionEffect, transform.position, Quaternion.identity);
+            Debug.Log("Pooof");
+
+            --dashesLeft;
         }
 
     }
@@ -149,6 +159,12 @@ public class PlayerController : MonoBehaviour
             OnPlayerKilled?.Invoke();
             Restart();
         }
+
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            dashesLeft = dashMaxCount;
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
