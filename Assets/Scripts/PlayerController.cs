@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
 
     public GameObject beerCollectionEffect;
 
+    [Header("Sounds")]
+    public AudioSource BeerPouringSound;
+
 
     void Start()
     {
@@ -171,6 +174,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Beer"))
         {
+            BeerPouringSound.Play();
             other.gameObject.SetActive(false);
             CollectBeer();
         }
