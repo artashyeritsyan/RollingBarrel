@@ -38,7 +38,9 @@ public class PlayerController : MonoBehaviour
     public GameObject beerCollectionEffect;
 
     [Header("Sounds")]
-    public AudioSource BeerPouringSound;
+    public AudioSource beerPouringSound;
+    public AudioSource poofSound;
+
 
 
     void Start()
@@ -143,7 +145,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce((moveDirection + new Vector3(0, 0.5f, 0)) * dashForce);
             menuController.reduceBeerFilledValue(dashCost);
             Instantiate(beerCollectionEffect, transform.position, Quaternion.identity);
-            Debug.Log("Pooof");
+            poofSound.Play();
 
             --dashesLeft;
         }
@@ -174,7 +176,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Beer"))
         {
-            BeerPouringSound.Play();
+            beerPouringSound.Play();
             other.gameObject.SetActive(false);
             CollectBeer();
         }
