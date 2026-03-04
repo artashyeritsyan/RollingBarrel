@@ -13,3 +13,5 @@ A Skeleton 💀 is wandering through the maze, trying to catch you. If it touche
 You also have a Dash ability ⚡. It helps you dodge the Skeleton 💀 or escape when it gets too close. But it costs beer 🍺. Every time you use Dash ⚡, you lose some of the filled beer in your barrel, and the yellow bar goes down. So you can’t just use it all the time — you have to decide carefully when it’s worth it.
 
 If you collect 50 mugs 🍺 before time runs out ⏳, you win. If the Skeleton 💀 catches you or the timer hits zero, you start again.
+
+You can test the game here - https://losartos.itch.io/rolling-barrel
