@@ -30,6 +30,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] Image drunkedLine;
     [SerializeField] Image timeLine;
     [SerializeField] GameObject overdrunkText;
+    [SerializeField] TextMeshProUGUI dashHintText;
 
 
     [Header("Parameters")]
@@ -40,6 +41,8 @@ public class MenuController : MonoBehaviour
     [SerializeField] int maxBeerLimit = 100;
     [SerializeField] int beerImpact = 10;
     [SerializeField] int snackImpact = 10;
+    [SerializeField] float dashHindDuration;
+    private bool isDashHintOn;
     private float timeRemaining;
     private float beerCount = 0;
     private float beerFilledValue = 0;
@@ -51,6 +54,7 @@ public class MenuController : MonoBehaviour
      // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        isDashHintOn = false;
         beerCount = 0;
         timeRemaining = gameTime;
         beerFilledValue = startingBeerFilledCount;
@@ -81,7 +85,14 @@ public class MenuController : MonoBehaviour
             GameOver();
         }
 
-        DrunkBarValueManager();
+        if (isDashHintOn)
+        {
+            dashHintText.alpha -= Time.deltaTime;
+
+            if (dashHintText.alpha < 0) { dashHintText.alpha = 0; }
+        }
+
+        //DrunkBarValueManager();
         UpdateTimerUI();
     }    
 
@@ -159,11 +170,6 @@ public class MenuController : MonoBehaviour
         gameOverlayPanel.SetActive(true);
 
         gameArea.SetActive(true);
-
-        OnGameReset?.Invoke();
-        ChangeAlcoholLevel?.Invoke(0);
-        TurnOnAllItems();
-
         foreach (var wall in walls)
         {
             if (wall == null) continue;
@@ -177,12 +183,14 @@ public class MenuController : MonoBehaviour
 
         }
 
+        OnGameReset?.Invoke();
+        ChangeAlcoholLevel?.Invoke(0);
+        TurnOnAllItems();
+        startDashHint();
     }
 
     public void Menu()
     {
-        // TODO: Change later
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
         menuPanel.SetActive(true);
         gameOverPanel.SetActive(false);
@@ -207,9 +215,6 @@ public class MenuController : MonoBehaviour
 
     public void Restart()
     {
-        // TODO: Change later
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
         beerCount = 0;
         timeRemaining = gameTime;
         beerFilledValue = startingBeerFilledCount;
@@ -238,10 +243,15 @@ public class MenuController : MonoBehaviour
 
         }
 
-        
+        startDashHint();
 
     }
 
+    void startDashHint()
+    {
+        isDashHintOn = true;
+        dashHintText.alpha = dashHindDuration;
+    }
     void TurnOnAllItems()
     {
         foreach (var beer in beers)
@@ -300,6 +310,7 @@ public class MenuController : MonoBehaviour
 
         overdrunkText.SetActive(false);
     }
+
 
     public void Exit()
     {
