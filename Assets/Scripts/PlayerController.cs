@@ -26,8 +26,7 @@ public class PlayerController : MonoBehaviour
 
     bool gamePaused;
     bool isOverdrunked;
-    bool isOnGround;
-    bool isHaveSecondJump;
+
 
     Transform child;
 
@@ -39,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Sounds")]
     public AudioSource beerPouringSound;
+    public AudioSource barrelMovingSound;
     public AudioSource poofSound;
 
 
@@ -68,15 +68,12 @@ public class PlayerController : MonoBehaviour
 
             moveDirection = camForward * movementY + camRight * movementX * 0.8f;
 
-            //if (isOverdrunked)
-            //{
-            //    //float randomX = Random.Range(-1f, 1f);
-            //    //float randomY = Random.Range(-1f, 1f);
-            //    //movement = new Vector3(0, 0, -movementY);
-            //    moveDirection = -moveDirection;
-            //}
-
             rb.AddForce(moveDirection * moveSpeed);
+
+            if ((rb.linearVelocity.x > 1 || rb.linearVelocity.z > 1) && dashesLeft == dashMaxCount)
+            {
+                barrelMovingSound.Play();
+            }
         }
     }
 
@@ -106,11 +103,11 @@ public class PlayerController : MonoBehaviour
 
     public void Restart()
     {
-        gamePaused = false;
         rb.linearVelocity = new Vector3(0, 0, 0);
         rb.angularVelocity = new Vector3(0, 0, 0);
         transform.position = spawnPoint;
         transform.rotation = Quaternion.Euler(0, 0, 0);
+        gamePaused = false;
     }
 
     void OverdrunkHandler(int duration)

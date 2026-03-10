@@ -17,14 +17,14 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-        setRandomSpawnPosition();
         agent = gameObject.GetComponent<NavMeshAgent>();
+        setRandomSpawnPosition();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player != null)
+        if (player != null && agent.isActiveAndEnabled)
         {
             agent.SetDestination(player.position);
 
@@ -52,13 +52,25 @@ public class Enemy : MonoBehaviour
     {
         if (spawnPoints == null) return;
 
-        Debug.Log(spawnPoints.transform.childCount);
-
-        int randomIndex = Random.Range(0, spawnPoints.transform.childCount); // max is exclusive
+        agent.enabled = false;
+        int randomIndex = Random.Range(0, spawnPoints.transform.childCount);
         Debug.Log("Rand index: " + randomIndex);
         Transform randomSpawnPoint = spawnPoints.transform.GetChild(randomIndex);
 
-        transform.position = randomSpawnPoint.position;
+        if (agent != null)
+        {
+            agent.velocity = Vector3.zero;
+            Debug.Log("Velocity 0 ");
+        }
+        transform.localPosition = randomSpawnPoint.localPosition;
+        if (agent != null)
+        {
+            agent.velocity = Vector3.zero;
+            Debug.Log("Velocity 0 ");
+
+        }
+        Debug.Log("Pos: " + transform.localPosition);
+        agent.enabled = true;
     }
 
     void OnEnable()
