@@ -801,7 +801,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: -0.00012207031, y: 0}
   m_SizeDelta: {x: 0, y: -20.9393}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &30065112
@@ -2650,7 +2650,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.1602173, y: 2}
+  m_AnchoredPosition: {x: -4.1602783, y: 2}
   m_SizeDelta: {x: -154.311, y: -871.1881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &116292824
@@ -6723,7 +6723,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &309936330
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10547,7 +10547,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.1602173, y: -190}
+  m_AnchoredPosition: {x: -4.1602783, y: -190}
   m_SizeDelta: {x: -154.311, y: -871.1881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &513205593
@@ -13182,7 +13182,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -4.1602173, y: 194.89795}
+  m_AnchoredPosition: {x: -4.1602783, y: 194.89795}
   m_SizeDelta: {x: -154.311, y: -871.1881}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &633280014
@@ -14317,7 +14317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -298.6937, y: -168.0153}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &685711591
@@ -17342,6 +17342,8 @@ MonoBehaviour:
   timeLine: {fileID: 1978713596}
   overdrunkText: {fileID: 1015607526}
   dashHintText: {fileID: 583023999}
+  clickOnScreenText: {fileID: 2004530470}
+  gameOverButtonsPanel: {fileID: 1219413505}
   gameTime: 300
   neededBeerCount: 50
   startingBeerFilledCount: 20
@@ -40697,7 +40699,7 @@ GameObject:
   - component: {fileID: 2004530471}
   - component: {fileID: 2004530470}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: clickOnScreenText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

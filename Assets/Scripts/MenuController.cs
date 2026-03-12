@@ -25,13 +25,16 @@ public class MenuController : MonoBehaviour
     [SerializeField] GameObject gameOverlayPanel;
     [SerializeField] GameObject gameWinPanel;
 
-    [Header("Game Overlay Elements")]
+    [Header("Overlay Elements")]
     [SerializeField] TextMeshProUGUI beerCountText;
     [SerializeField] Image drunkedLine;
     [SerializeField] Image timeLine;
     [SerializeField] GameObject overdrunkText;
     [SerializeField] TextMeshProUGUI dashHintText;
 
+    [Header("Game Over Elements")]
+    [SerializeField] TextMeshProUGUI clickOnScreenText;
+    [SerializeField] GameObject gameOverButtonsPanel;
 
     [Header("Parameters")]
     [SerializeField] int gameTime = 180;
@@ -55,6 +58,7 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         isDashHintOn = false;
+        startDashHint();
         beerCount = 0;
         timeRemaining = gameTime;
         beerFilledValue = startingBeerFilledCount;
@@ -205,6 +209,9 @@ public class MenuController : MonoBehaviour
         gameOverlayPanel.SetActive(false);
         gameOverPanel.SetActive(true);
         gameArea.SetActive(false);
+
+        clickOnScreenText.gameObject.SetActive(true);
+        gameOverButtonsPanel.SetActive(false);
     }
 
     void GameWin()
@@ -311,6 +318,14 @@ public class MenuController : MonoBehaviour
         overdrunkText.SetActive(false);
     }
 
+    private void OnDash()
+    {
+        if (gameOverlayPanel.activeSelf && !gameOverButtonsPanel.activeSelf)
+        {
+            clickOnScreenText.gameObject.SetActive(false);
+            gameOverButtonsPanel.SetActive(true);
+        }
+    }
 
     public void Exit()
     {
